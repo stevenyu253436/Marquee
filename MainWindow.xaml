@@ -1,0 +1,156 @@
+﻿<Window x:Class="Marquee.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Marquee"
+        mc:Ignorable="d"
+        Title="其他作業" Height="420" Width="620">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0">
+            <GroupBox.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="廣播發送" Foreground="Blue" FontSize="16"/>
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
+            <!-- 這裡放置GroupBox的內容 -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="480"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="TextBox1" Text="" Grid.Row="0" Grid.Column="0" 
+                         Background="Black" Foreground="Red" IsReadOnly="True"
+                         FontSize="25" TextChanged="TextBox1_TextChanged"/>
+
+                <ComboBox x:Name="RoomNumbersComboBox" Margin="5,5,20,5" Grid.Row="0" Grid.Column="1" FontSize="25"/>
+
+                <TextBox x:Name="TextBox2" Text="" Grid.Row="1" Grid.Column="0" 
+                         Background="Black" Foreground="Red" IsReadOnly="True"
+                         FontSize="25"/>
+
+                <ComboBox x:Name="Marquee1ComboBox" Margin="5" Grid.Row="2" Grid.Column="0"
+                          ItemsSource="{Binding Marquee1Items}" FontSize="25"
+                          SelectionChanged="MarqueeComboBox_SelectionChanged">
+                </ComboBox>
+
+                <Button Margin="5,5,20,5" Grid.Row="2" Grid.Column="1">
+                    <TextBlock Text="預覽" FontSize="25"/>
+                </Button>
+
+                <TextBox x:Name="TextBox3" Text="" Grid.Row="3" Grid.Column="0" Margin="5" FontSize="25"
+                         TextChanged="TextBox3_TextChanged"/>
+
+                <Button Margin="5,5,20,5" Grid.Row="3" Grid.Column="1" Click="SendAnnouncement_Click">
+                    <TextBlock Text="發送" FontSize="25"/>
+                </Button>
+
+                <ComboBox x:Name="Marquee2ComboBox" Grid.Row="4" Grid.Column="0" Margin="5"
+                          ItemsSource="{Binding Marquee2Items}" FontSize="25"
+                          SelectionChanged="MarqueeComboBox_SelectionChanged">
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="180"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Margin="5" Grid.Row="0" Grid.Column="0">
+                <TextBlock Text="全部關機" FontSize="25"/>
+            </Button>
+            <Button Margin="5" Grid.Row="1" Grid.Column="0">
+                <TextBlock Text="全部開機" FontSize="25"/>
+            </Button>
+            <Button Margin="5" Grid.Row="0" Grid.Column="1">
+                <TextBlock Text="取消全部關機" FontSize="25"/>
+            </Button>
+            <Button Margin="5" Grid.Row="1" Grid.Column="1">
+                <TextBlock Text="取消全部廣播" FontSize="25"/>
+            </Button>
+            <Button Margin="5" Click="ToggleVisibility" Grid.Row="0" Grid.Column="2">
+                <TextBlock Text="罐頭字設定" FontSize="25"/>
+            </Button>
+            <Button Margin="5" Grid.Row="1" Grid.Column="2">
+                <TextBlock Text="離開" FontSize="25"/>
+            </Button>
+        </Grid>
+
+        <GroupBox x:Name="SettingsGroupBox" Grid.Row="2" Margin="0,20,0,0" Visibility="Collapsed">
+            <GroupBox.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="罐頭字設定" Foreground="Blue" FontSize="16"/>
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
+            <!-- 這裡放置GroupBox的內容 -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="480"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox x:Name="EditMarquee1ComboBox" Margin="5" Grid.Row="0" Grid.Column="0"
+                          ItemsSource="{Binding Marquee1Items}" FontSize="25"
+                          SelectionChanged="EditMarquee1ComboBox_SelectionChanged">
+                </ComboBox>
+
+                <Button x:Name="DeleteMarquee1Button" Grid.Row="0" Grid.Column="1" Margin="5,5,15,5" Click="DeleteMarquee1Button_Click">
+                    <TextBlock Text="刪除" FontSize="25"/>
+                </Button>
+
+                <TextBox x:Name="TextBoxForMarquee1" Text="" Grid.Row="1" Margin="5" FontSize="25"/>
+
+                <Button Grid.Row="1" Grid.Column="1" Margin="5,5,15,5" Click="AddMarquee1Button_Click">
+                    <TextBlock Text="新增" FontSize="25"/>
+                </Button>
+
+                <ComboBox x:Name="EditMarquee2ComboBox" Margin="5" Grid.Row="2" Grid.Column="0"
+                          ItemsSource="{Binding Marquee2Items}" FontSize="25"
+                          SelectedItem="{Binding SelectedMarquee2Item, Mode=TwoWay}"
+                          SelectionChanged="EditMarquee2ComboBox_SelectionChanged">
+                </ComboBox>
+
+                <Button x:Name="DeleteMarquee2Button" Grid.Row="2" Grid.Column="1" Margin="5,5,15,5" Click="DeleteMarquee2Button_Click">
+                    <TextBlock Text="刪除" FontSize="25"/>
+                </Button>
+
+                <TextBox x:Name="TextBoxForMarquee2" Text="{Binding TextBoxForMarquee2, Mode=TwoWay}" Grid.Row="3" Margin="5" FontSize="25"
+                         TextChanged="TextBoxForMarquee2_TextChanged"/>
+
+                <Button Grid.Row="3" Grid.Column="1" Margin="5,5,15,5" Click="AddMarquee2Button_Click">
+                    <TextBlock Text="新增" FontSize="25"/>
+                </Button>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
