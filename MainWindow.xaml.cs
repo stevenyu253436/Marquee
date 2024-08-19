@@ -121,6 +121,11 @@ namespace Marquee
                     TextBox2.Text = textBox.Text.Substring(maxFittingLength);
                     textBox.Text = textBox.Text.Substring(0, maxFittingLength);
                 }
+                else
+                {
+                    // 如果maxFittingLength為0，清空TextBox2
+                    TextBox2.Text = string.Empty;
+                }
             }
         }
 

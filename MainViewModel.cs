@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System;
 using System.Collections.Generic;
+using System.Windows.Controls;
 
 public class MainViewModel : INotifyPropertyChanged
 {
@@ -73,6 +74,20 @@ public class MainViewModel : INotifyPropertyChanged
         }
     }
 
+    private string _textBox2;
+    public string TextBox2
+    {
+        get => _textBox2;
+        set
+        {
+            if (_textBox2 != value)
+            {
+                _textBox2 = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public MainViewModel()
     {
         Marquee1Items = new ObservableCollection<string>(File.ReadAllLines(@"txt\marquee1_items.txt"));
@@ -115,6 +130,16 @@ public class MainViewModel : INotifyPropertyChanged
     private void UpdateTextBox1()
     {
         TextBox1 = $"{SelectedMarquee1Item ?? ""} {(string.IsNullOrEmpty(TextBoxForMarquee2) ? "" : " " + TextBoxForMarquee2 + " ")} {SelectedMarquee2Item ?? ""}";
+
+        // 更新 TextBox2 (第二行)
+        UpdateTextBox2();
+    }
+
+    private void UpdateTextBox2()
+    {
+        // 假設第二行的文字依賴於第一行
+        // 你可以根據你的具體需求來設計這段邏輯
+        TextBox2 = $"{SelectedMarquee2Item ?? ""}";
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
